@@ -83,5 +83,40 @@ test("1 + 1 should be 2", () => {
 // toThrow
 test("1 + 1 should be 2", () => {
   expect(addError).toThrow();
-});
+}); 
 
+
+// Test asynchrone
+// function asynchrone(cb) {
+//   setTimeout(() => {
+//     const data = "N'importe quelle valeur";
+//     cb(data);
+//   }, 1000);
+// }
+
+// test("tester une fonction de rappel", () => {
+//   function callback(data) {
+//     expect(data).toBe(42);
+//   }
+
+//   asynchrone(callback);
+// });
+
+
+// attendre l'execution de la function avec expect.hasAssertions()
+function asynchrone(cb) {
+  setTimeout(() => {
+    const data = 42;
+    cb(data);
+  }, 1000);
+}
+
+test("tester une fonction de rappel", done => {
+  expect.hasAssertions();
+  function callback(data) {
+    expect(data).toBe(42);
+    done();
+  }
+
+  asynchrone(callback);
+});
