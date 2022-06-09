@@ -1,4 +1,4 @@
-import { add, addError } from "./math";
+import { add, add2, addError } from "./math";
 
 // test("1 + 1 should be 2", () => {
 //   expect(add(1, 1)).toBe(2);
@@ -83,8 +83,7 @@ test("1 + 1 should be 2", () => {
 // toThrow
 test("1 + 1 should be 2", () => {
   expect(addError).toThrow();
-}); 
-
+});
 
 // Test asynchrone
 // function asynchrone(cb) {
@@ -102,6 +101,35 @@ test("1 + 1 should be 2", () => {
 //   asynchrone(callback);
 // });
 
+// Done
+test("should be 3", (done) => {
+  const cb = (res) => {
+    expect(res).toBe(3);
+    done();
+  };
+  add(1, 2, cb);
+});
+
+// Promise
+test("should be 2", () => {
+  return add2(1, 1).then((res) => {
+    expect(res).toBe(2);
+  });
+});
+
+test("should be 2", () => {
+  return expect(add2(1, 1)).resolves.toBe(2);
+});
+
+// Async Await
+test("should be 2", async () => {
+  await expect(add2(1, 1)).resolves.toBe(2);
+});
+
+test("should be 2", async () => {
+  const res = await add2(1, 1);
+  expect(res).toBe(2);
+});
 
 // attendre l'execution de la function avec expect.hasAssertions()
 function asynchrone(cb) {
@@ -111,7 +139,7 @@ function asynchrone(cb) {
   }, 1000);
 }
 
-test("tester une fonction de rappel", done => {
+test("tester une fonction de rappel", (done) => {
   expect.hasAssertions();
   function callback(data) {
     expect(data).toBe(42);
