@@ -11,3 +11,7 @@ export function add2(a, b) {
     resolve(a + b);
   });
 }
+
+export function add3(a, b, cb) {
+  return cb(a + b);
+}
